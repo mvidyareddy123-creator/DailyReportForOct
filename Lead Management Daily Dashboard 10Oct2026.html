@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lead Management Daily Dashboard – 10 Oct 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#f3f5f4;--card:#fff;--ink:#12302f;--mut:#667571;--line:#dbe2df;--sp:#0f4c4a;--ok:#2d7a4e;--warn:#c27a08;--bad:#b3321f;--okb:#e1f1e8;--warnb:#fbefd6;--badb:#f8e0dc;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1716;--card:#16231f;--ink:#e6efec;--mut:#92a39e;--line:#263733;--sp:#4fb3a9;--ok:#5cc189;--warn:#e0a53a;--bad:#ef7b69;--okb:#1b3a2a;--warnb:#3b2f14;--badb:#41201b}}
+:root[data-theme="dark"]{--bg:#0e1716;--card:#16231f;--ink:#e6efec;--mut:#92a39e;--line:#263733;--sp:#4fb3a9;--ok:#5cc189;--warn:#e0a53a;--bad:#ef7b69;--okb:#1b3a2a;--warnb:#3b2f14;--badb:#41201b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Figtree,system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:24px;margin:0;font-weight:800;letter-spacing:-.01em}h2{font-size:16px;margin:28px 0 10px;font-weight:800}
+.sub{color:var(--mut);margin:4px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:18px}
+.k{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.k b{display:block;font-size:28px;font-weight:800;line-height:1.1}.k span{color:var(--mut);font-size:12.5px}
+.k.bad b{color:var(--bad)}.k.warn b{color:var(--warn)}.k.ok b{color:var(--ok)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.bar{display:flex;height:34px;border-radius:5px;overflow:hidden;gap:2px}.bar div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:12px;min-width:2px}
+.leg{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:12.5px}.leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:12px;color:var(--mut);font-weight:600}th:first-child,td:first-child{text-align:left}td.l{text-align:left}
+.g{background:var(--okb);color:var(--ok);font-weight:600}.a{background:var(--warnb);color:var(--warn);font-weight:600}.r{background:var(--badb);color:var(--bad);font-weight:600}
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.reg .card b{font-size:15px}.reg small{color:var(--mut);display:block;margin-top:2px}
+.mini{height:6px;background:var(--line);border-radius:3px;margin:8px 0 3px;overflow:hidden}.mini div{height:100%;background:var(--sp)}
+.issues{display:grid;gap:10px}.is{display:grid;grid-template-columns:44px 1fr;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px;border-left:4px solid var(--bad)}
+.is.w{border-left-color:var(--warn)}.is .n{font-size:22px;font-weight:800;color:var(--bad)}.is.w .n{color:var(--warn)}
+.is h3{margin:0 0 2px;font-size:14.5px}.is p{margin:0;color:var(--mut)}.is p b{color:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+ul.t{margin:6px 0 0;padding-left:18px}ul.t li{margin:4px 0}.tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11.5px;font-weight:600;background:var(--warnb);color:var(--warn)}
+.foot{margin-top:28px;color:var(--mut);font-size:12px}
+</style></head><body><main>
+<h1>Lead management daily dashboard</h1>
+<p class="sub">Report pulled 10 Oct 2026 · 266 leads whose Facebook form submission was on 9 Oct · 63 advisors · 19 branches</p>
+<div class="kpis" id="kpis"></div>
+
+<h2>Where the 266 leads sit today</h2>
+<div class="card"><div class="bar" id="bar"></div><div class="leg" id="leg"></div>
+<p class="sub" style="margin-top:10px">Call Back is the largest pile, but 45 of the 66 Follow Ups are only waiting on a resume, and 16 leads have no activity logged at all. Fixes below cover all of these, not just call-backs.</p></div>
+
+<h2>What to fix first (ranked by leads affected)</h2>
+<div class="issues" id="issues"></div>
+
+<h2>Region view</h2><div class="reg" id="reg"></div>
+
+<h2>Branch view</h2>
+<div class="card scroll"><table id="brt"></table></div>
+<p class="sub">Progressed = Follow Up + Warm + Hot. Unreachable = activity note says no answer / switched off / busy. Colours: green is good, red needs action.</p>
+
+<h2>Facebook form view</h2>
+<div class="card scroll"><table id="fmt"></table></div>
+
+<h2>Tomorrow's plan</h2>
+<div class="two">
+<div class="card"><b>Before 10:30</b><ul class="t" id="p1"></ul></div>
+<div class="card"><b>Through the day</b><ul class="t">
+<li><b>Re-enquiries first (78 leads):</b> these are older leads that filled a form again, so intent is fresh. Only 12 are tagged Re-Enquired; the rest sit in Call Back or Follow Up.</li>
+<li><b>Call-back cadence (143 leads):</b> three attempts in three slots (10–12, 2–4, 6–8), then one WhatsApp with a call-slot question. Move to Cold only after 3 attempts on 2 days.</li>
+<li><b>CV chase (45 Follow Ups):</b> WhatsApp reminder with 24-hour deadline; book a branch visit slot in the same call.</li>
+<li><b>Rebalance:</b> hand call-backs from advisors with 9+ leads to advisors with 1–2 in the same language.</li>
+<li><b>Stage hygiene:</b> no stage change without a one-line outcome note. "NA", "na" and blank notes do not count.</li></ul></div>
+<div class="card"><b>Targets for tomorrow's report (suggested)</b><ul class="t">
+<li>Leads with no activity: 16 → 0</li><li>Call Backs with an unreachable note: 84% → under 70%</li>
+<li>Progressed share: 27.8% → 32%</li><li>Handled by another branch: 21% → under 15%</li>
+<li>All 8 Warm/Hot leads spoken to; 3 branch visits booked</li></ul></div>
+</div>
+</main>
+<script>
+const D={"total": 266, "fresh": 188, "old": 78, "st": [["Call Back", 143], ["Follow Up", 66], ["Lead", 16], ["Cold Lead", 15], ["Re-Enquired Lead", 12], ["Warm Lead", 7], ["Dead Lead", 6], ["Hot Lead", 1]], "reg": [["Karnataka", {"n": 71, "p": 20, "r": 36, "b": 0, "x": 26}], ["Tamil Nadu", {"n": 66, "p": 13, "r": 32, "b": 11, "x": 10}], ["Kerala", {"n": 64, "p": 25, "r": 32, "b": 2, "x": 13}], ["AP/TS", {"n": 56, "p": 13, "r": 32, "b": 3, "x": 7}], ["Indore", {"n": 9, "p": 3, "r": 2, "b": 0, "x": 0}]], "br": [["Bangalore", {"n": 27, "p": 4, "r": 15, "b": 0, "x": 5}, "Karnataka"], ["Chennai", {"n": 25, "p": 3, "r": 12, "b": 4, "x": 7}, "Tamil Nadu"], ["Mysore", {"n": 24, "p": 10, "r": 11, "b": 0, "x": 4}, "Karnataka"], ["Thrissur-MG Road", {"n": 20, "p": 11, "r": 8, "b": 0, "x": 2}, "Kerala"], ["Coimbatore", {"n": 18, "p": 8, "r": 9, "b": 0, "x": 1}, "Tamil Nadu"], ["Kottayam", {"n": 17, "p": 4, "r": 9, "b": 2, "x": 4}, "Kerala"], ["Madhurai", {"n": 16, "p": 1, "r": 6, "b": 7, "x": 0}, "Tamil Nadu"], ["Vishakhapatnam", {"n": 14, "p": 3, "r": 7, "b": 0, "x": 2}, "AP/TS"], ["Hyderabad", {"n": 12, "p": 2, "r": 7, "b": 1, "x": 0}, "AP/TS"], ["Kochi", {"n": 12, "p": 2, "r": 9, "b": 0, "x": 4}, "Kerala"], ["Vijayawada", {"n": 12, "p": 3, "r": 8, "b": 1, "x": 3}, "AP/TS"], ["Mangalore", {"n": 11, "p": 4, "r": 6, "b": 0, "x": 11}, "Karnataka"], ["Hubli", {"n": 9, "p": 2, "r": 4, "b": 0, "x": 6}, "Karnataka"], ["Indore", {"n": 9, "p": 3, "r": 2, "b": 0, "x": 0}, "Indore"], ["Kakinada", {"n": 9, "p": 4, "r": 6, "b": 0, "x": 0}, "AP/TS"], ["Nellore", {"n": 9, "p": 1, "r": 4, "b": 1, "x": 2}, "AP/TS"], ["Trivandrum", {"n": 9, "p": 5, "r": 3, "b": 0, "x": 0}, "Kerala"], ["Salem", {"n": 7, "p": 1, "r": 5, "b": 0, "x": 2}, "Tamil Nadu"], ["Calicut", {"n": 6, "p": 3, "r": 3, "b": 0, "x": 3}, "Kerala"]], "fm": [["Tamil Nadu | Work Visa | Aug 10", {"n": 33, "p": 8, "r": 14, "b": 3, "x": 7}], ["Mysore leads- BM leads-copy", {"n": 23, "p": 10, "r": 10, "b": 0, "x": 3}], ["Kerala | Work Visa | Aug 10-copy", {"n": 22, "p": 7, "r": 15, "b": 1, "x": 7}], ["Kerala | Work Visa | Aug 10- Sep 8", {"n": 17, "p": 3, "r": 9, "b": 1, "x": 4}], ["Madurai Leads-Foe number", {"n": 15, "p": 1, "r": 6, "b": 6, "x": 1}], ["Thrissur | Kerala | Work Visa | Sep 3", {"n": 15, "p": 9, "r": 5, "b": 0, "x": 2}], ["BANGALORE Form - BM", {"n": 14, "p": 4, "r": 7, "b": 0, "x": 3}], ["Coimbatore | Work Visa | Sep 4 Copy", {"n": 14, "p": 5, "r": 8, "b": 1, "x": 1}], ["Mangalore WV | Aug 29", {"n": 14, "p": 3, "r": 7, "b": 0, "x": 9}], ["Hubli WV | Aug 29-copy-Oct 6", {"n": 13, "p": 3, "r": 6, "b": 0, "x": 6}], ["Indore | Work Visa | Oct 6", {"n": 12, "p": 3, "r": 4, "b": 0, "x": 2}], ["Vijayawada WV | Aug 29", {"n": 12, "p": 1, "r": 10, "b": 1, "x": 4}], ["Vizag Form- Foe", {"n": 12, "p": 3, "r": 5, "b": 0, "x": 0}], ["Hyderabad WV | Aug 29", {"n": 11, "p": 1, "r": 8, "b": 1, "x": 2}], ["Cruise Ship | 6 states", {"n": 10, "p": 4, "r": 5, "b": 1, "x": 1}], ["Kakinada WV | Aug 29-copy", {"n": 10, "p": 4, "r": 7, "b": 0, "x": 1}], ["Nellore WV | Aug 29", {"n": 8, "p": 0, "r": 4, "b": 1, "x": 1}], ["Cruise Ship New Ad Form | Aug 27", {"n": 7, "p": 3, "r": 3, "b": 0, "x": 2}], ["Cruise Ship | Kerala", {"n": 4, "p": 2, "r": 1, "b": 0, "x": 0}]], "own": [["Bharath A", "Chennai", {"n": 8, "p": 0, "r": 6, "b": 1, "x": 1}], ["Sujatha J", "Chennai", {"n": 6, "p": 0, "r": 2, "b": 3, "x": 0}], ["Yasmin Nihara", "Madhurai", {"n": 8, "p": 0, "r": 0, "b": 7, "x": 0}], ["Mathumitha Srri", "Madhurai", {"n": 9, "p": 1, "r": 7, "b": 0, "x": 1}], ["Krishnaveni P", "Chennai", {"n": 7, "p": 1, "r": 4, "b": 0, "x": 2}], ["Neelima ", "Vishakhapatnam", {"n": 7, "p": 1, "r": 4, "b": 0, "x": 1}], ["Sweatha H S", "Mysore", {"n": 6, "p": 1, "r": 4, "b": 0, "x": 0}], ["Ancy Velankanni Y", "Bangalore", {"n": 10, "p": 2, "r": 7, "b": 0, "x": 3}], ["Monisha S Narayan", "Bangalore", {"n": 10, "p": 2, "r": 6, "b": 0, "x": 5}], ["Maria Angel", "Mysore", {"n": 9, "p": 2, "r": 3, "b": 0, "x": 1}], ["Harshitha ", "Bangalore", {"n": 10, "p": 3, "r": 7, "b": 0, "x": 5}], ["Pavan D", "Bangalore", {"n": 10, "p": 3, "r": 3, "b": 0, "x": 6}], ["Shalini Venkatachalam", "Coimbatore", {"n": 16, "p": 8, "r": 7, "b": 0, "x": 0}], ["Sreelakshmi K S", "Thrissur-MG Road", {"n": 10, "p": 5, "r": 5, "b": 0, "x": 2}], ["Aswini M R", "Thrissur-MG Road", {"n": 7, "p": 5, "r": 1, "b": 0, "x": 2}], ["Nandana M K", "Mysore", {"n": 6, "p": 5, "r": 2, "b": 0, "x": 0}]], "bl": [["Yasmin Nihara", "Madhurai", 7], ["Sujatha J", "Chennai", 3], ["Athira Rajan", "Kottayam", 1], ["Bharath A", "Chennai", 1], ["Nidheena K Thankachan", "Kottayam", 1], ["Keerthi Naga A", "Nellore", 1], ["Subana Begum Shaik", "Vijayawada", 1], ["Pranitha K", "Hyderabad", 1]], "hw": [["Warm Lead", "Mangalore", "Monisha S Narayan"], ["Warm Lead", "Kakinada", "Vasundhara Gutam"], ["Warm Lead", "Mysore", "Maria Angel"], ["Warm Lead", "Mysore", "Nandana M K"], ["Warm Lead", "Bangalore", "Monisha S Narayan"], ["Hot Lead", "Mangalore", "Harshitha "], ["Warm Lead", "Mysore", "Sweatha H S"], ["Warm Lead", "Mysore", "Maria Angel"]], "cats": {"Not reachable / RNR": 134, "Resume / details requested": 55, "Not interested / unfit / budget": 32, "Qualified conversation / other": 23, "No note / untouched": 16, "Branch visit discussed": 6}, "prog": 74, "rnr": 134, "blank": 16, "xb": 56, "owners": 63};
+const pc=(a,b)=>b?Math.round(a/b*100):0,$=id=>document.getElementById(id);
+const cls=(v,g,r,inv)=>inv?(v<=g?'g':v>=r?'r':'a'):(v>=g?'g':v<=r?'r':'a');
+const K=[['Leads',D.total,'',D.fresh+' new, '+D.old+' older leads resubmitting'],['Progressed',pc(D.prog,D.total)+'%','warn','Follow Up + Warm + Hot ('+D.prog+')'],['Warm / Hot',8,'bad','3% of leads, 1 Hot and 7 Warm'],['Unreachable notes',pc(D.rnr,D.total)+'%','bad',D.rnr+' leads, 84% of Call Backs'],['No activity logged',D.blank,'bad','6%, 11 of them in Tamil Nadu']];
+$('kpis').innerHTML=K.map(k=>`<div class="k ${k[2]}"><b>${k[1]}</b><span>${k[0]}<br>${k[3]}</span></div>`).join('');
+const col={'Call Back':'#0f4c4a','Follow Up':'#2d7a4e','Lead':'#b3321f','Cold Lead':'#7a8a86','Re-Enquired Lead':'#3b7ea1','Warm Lead':'#c27a08','Dead Lead':'#4a5551','Hot Lead':'#d1452f'};
+$('bar').innerHTML=D.st.map(s=>`<div style="flex:${s[1]};background:${col[s[0]]}">${s[1]>=12?s[1]:''}</div>`).join('');
+$('leg').innerHTML=D.st.map(s=>`<span><i style="background:${col[s[0]]}"></i>${s[0]} ${s[1]} (${pc(s[1],D.total)}%)</span>`).join('');
+const I=[
+['134','Unreachable (RNR)','<b>50% of leads; 120 of 143 Call Backs.</b> Single-slot calling is failing. Use three attempts in three time slots plus a WhatsApp, and only then move to Cold.',0],
+['45','Follow Ups stuck on resume','<b>68% of Follow Ups</b> are waiting for a CV or details; only 6 leads have a branch visit discussed. Ask for the CV with a 24-hour deadline and book the visit during the same call.',0],
+['78','Re-enquiries not prioritised','<b>29% of leads</b> are older leads that submitted a form again. Only 12 are tagged Re-Enquired; 56% of the 78 are still unreachable. Call these first, they are the warmest.',0],
+['32','Not interested, unfit or no budget','<b>12% of notes</b>: age, education, budget, wants local or Gulf jobs, free recruitment. Plus 21 Cold or Dead leads. This is an ad-targeting and form-question gap, not an advisor gap.',1],
+['16','No activity logged','<b>Madurai advisor Yasmin Nihara has 7</b> (0 progressed of 8), Chennai advisor Sujatha J has 3. Reassign anything not touched by 10:30.',0],
+['6','Form hotspots to pause or fix','<b>Vijayawada 83% unreachable, Hyderabad 73%, Kakinada 70%, Kerala Aug 10 copy 68%</b>; Nellore 0% progressed, Madurai Foe-number form 7% (mostly untouched leads, so a handling issue).',1],
+['5','Stage and data hygiene','Maria Angel (Mysore) has a Warm lead whose note says not answering; 3 Follow Ups carry unreachable notes; notes like "NA" are not outcomes. No first-call time is captured, so speed to lead is not measurable.',1]];
+$('issues').innerHTML=I.map(i=>`<div class="is ${i[3]?'w':''}"><div class="n">${i[0]}</div><div><h3>${i[1]}</h3><p>${i[2]}</p></div></div>`).join('');
+$('reg').innerHTML=D.reg.map(r=>{const a=r[1];return `<div class="card"><b>${r[0]}</b><small>${a.n} leads</small><div class="mini"><div style="width:${pc(a.p,a.n)}%"></div></div><small>${pc(a.p,a.n)}% progressed · ${pc(a.r,a.n)}% unreachable</small><small>${a.b} no activity · ${a.x} handled elsewhere</small></div>`}).join('');
+const th=(h)=>'<tr>'+h.map(x=>`<th>${x}</th>`).join('')+'</tr>';
+const row=(n,a,extra)=>`<tr><td>${n}</td><td>${a.n}</td><td class="${cls(pc(a.p,a.n),40,15)}">${pc(a.p,a.n)}%</td><td class="${cls(pc(a.r,a.n),45,65,1)}">${pc(a.r,a.n)}%</td><td class="${a.b?'r':''}">${a.b||'–'}</td>${extra}</tr>`;
+$('brt').innerHTML=th(['Branch','Leads','Progressed','Unreachable','No activity'])+D.br.map(b=>row(b[0],b[1],'')).join('');
+$('fmt').innerHTML=th(['Form','Leads','Progressed','Unreachable','No activity'])+D.fm.map(b=>row(b[0],b[1],'')).join('');
+$('p1').innerHTML='<li><b>Untouched leads ('+D.blank+'):</b> '+D.bl.map(x=>x[0]+' ('+x[1]+') '+x[2]).join(', ')+'.</li><li><b>Warm / Hot leads (8), call first:</b> '+D.hw.map(x=>x[2]+' ('+x[1]+', '+x[0].replace(' Lead','')+')').join('; ')+'.</li><li>Assign a Mangalore and Hubli owner for the day instead of Bangalore overflow.</li>';
+</script></body></html>
