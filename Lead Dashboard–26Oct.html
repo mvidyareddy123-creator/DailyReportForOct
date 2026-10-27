@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daily Lead Dashboard – 26 Oct 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f5f7;--card:#fff;--ink:#12263a;--mute:#5b6b7a;--line:#dde4ea;--teal:#0f766e;--blue:#2f6fa8;--amber:#d98e04;--red:#b42318;--grey:#9aa7b3;--hot:#7a1fa2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a24;--card:#152634;--ink:#e6edf3;--mute:#93a4b3;--line:#27394a;--teal:#2dd4bf;--blue:#6aa9e0;--amber:#f2b134;--red:#f97066;--grey:#6b7c8c;--hot:#d28bf0}}
+:root[data-theme="dark"]{--bg:#0e1a24;--card:#152634;--ink:#e6edf3;--mute:#93a4b3;--line:#27394a;--teal:#2dd4bf;--blue:#6aa9e0;--amber:#f2b134;--red:#f97066;--grey:#6b7c8c;--hot:#d28bf0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:22px;margin:0 0 2px;font-weight:600}
+h2{font-size:16px;margin:0 0 12px;font-weight:600}
+.sub{color:var(--mute);font-size:13px;margin:0 0 18px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px}
+.kpi b{display:block;font-size:26px;font-weight:600;line-height:1.1}
+.kpi span{color:var(--mute);font-size:12.5px}
+.kpi.warn b{color:var(--red)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.row{display:grid;grid-template-columns:118px 1fr 36px;gap:8px;align-items:center;margin:6px 0;font-size:13px}
+.bar{display:flex;height:16px;border-radius:3px;overflow:hidden;background:var(--line)}
+.bar i{display:block;height:100%}
+.num{text-align:right;color:var(--mute);font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--mute);margin-bottom:8px}
+.legend s{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;text-decoration:none}
+.hours{display:flex;align-items:flex-end;gap:5px;height:130px;padding-top:8px}
+.hours div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:11px;color:var(--mute)}
+.hours i{display:block;width:100%;background:var(--blue);border-radius:3px 3px 0 0;min-height:2px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--mute);font-weight:500;font-size:12px}
+tr.reg td{font-weight:600;background:var(--bg)}
+td.bad{color:var(--red);font-weight:600}
+td.good{color:var(--teal);font-weight:600}
+select{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);margin-bottom:10px}
+.hl{display:grid;gap:8px}
+.hl div{border-left:4px solid var(--amber);padding:6px 10px;background:var(--bg);border-radius:0 6px 6px 0;font-size:13px}
+.hl div.hot{border-color:var(--hot)}
+.hl small{color:var(--mute);display:block}
+.act li{margin-bottom:6px}
+</style>
+</head>
+<body>
+<main>
+<h1>Daily lead dashboard</h1>
+<p class="sub">26 Oct 2026 · 203 leads created 09:30–23:11 · stages as of export</p>
+
+<div class="kpis">
+<div class="kpi"><b>203</b><span>New leads</span></div>
+<div class="kpi"><b>173</b><span>Worked (85%)</span></div>
+<div class="kpi warn"><b>30</b><span>Untouched (15%)</span></div>
+<div class="kpi warn"><b>16</b><span>No sales group</span></div>
+<div class="kpi"><b>104</b><span>In Call Back (51%)</span></div>
+<div class="kpi"><b>5</b><span>Warm / Hot</span></div>
+</div>
+
+<div class="grid">
+<section class="card">
+<h2>Where leads sit by stage</h2>
+<div id="stages"></div>
+</section>
+<section class="card">
+<h2>Leads created by hour</h2>
+<div class="hours" id="hours"></div>
+<p class="sub" style="margin:10px 0 0">70% arrived between 14:00 and 16:00, which looks like a bulk sync.</p>
+</section>
+</div>
+
+<section class="card" style="margin-bottom:14px">
+<h2>Branch performance</h2>
+<div class="legend" id="lg"></div>
+<select id="reg" aria-label="Filter by region"></select>
+<div id="branches"></div>
+</section>
+
+<div class="grid">
+<section class="card">
+<h2>Advisors with 5+ leads</h2>
+<div class="scroll"><table id="adv"></table></div>
+</section>
+<section class="card">
+<h2>Warm and Hot leads to chase today</h2>
+<div class="hl">
+<div class="hot"><b>Bangalore · Ancy Velankanni Y · Hot</b><small>Luxembourg referral, virtual meeting done, ₹50K token requested, client deciding.</small></div>
+<div><b>Bangalore · Monisha S Narayan · Warm</b><small>Client and spouse visiting the office on 31 Oct.</small></div>
+<div><b>Bangalore · Harshitha · Warm</b><small>Ireland master's graduate, wants a sponsorship programme.</small></div>
+<div><b>Nellore · Monisha S Narayan · Warm</b><small>IT professional, France guidance given, resume requested.</small></div>
+<div><b>Thrissur-MG Road · Sreelakshmi K S · Warm</b><small>France sponsorship quoted, office visit needed.</small></div>
+</div>
+</section>
+</div>
+
+<section class="card">
+<h2>Actions for today</h2>
+<ol class="act">
+<li>Assign a sales group and advisor to the 16 unassigned leads (7 sit with Selvi K).</li>
+<li>Clear 14 more untouched leads: Mysore 5 (4 with Nandana M K), Indore 3, Chennai 2, and one each in Coimbatore, Hyderabad, Kakinada, Salem.</li>
+<li>Run a second call attempt and WhatsApp outreach on the Vijayawada and Hyderabad Call Back backlog (49 leads).</li>
+<li>Check phone-number capture on the Vijayawada "Foe Number" and Hyderabad WV forms.</li>
+<li>Close the loop on the Hot lead and confirm the 31 Oct office visit.</li>
+</ol>
+</section>
+</main>
+<script>
+var ST=[["Call Back",104,"#2f6fa8"],["Follow Up",39,"#0f766e"],["Lead (untouched)",30,"#b42318"],["Cold Lead",21,"#9aa7b3"],["Dead Lead",4,"#5b6b7a"],["Warm Lead",4,"#d98e04"],["Hot Lead",1,"#7a1fa2"]];
+var HR=[[9,3],[10,4],[11,5],[12,6],[13,5],[14,83],[15,60],[16,19],[17,14],[18,3],[23,1]];
+/* branch, region, callback, followup, cold/dead, warm/hot, untouched */
+var BR=[["Vijayawada","AP/Telangana",27,1,2,0,0],["Kakinada","AP/Telangana",16,10,2,0,1],["Hyderabad","AP/Telangana",22,3,2,0,1],["Vishakhapatnam","AP/Telangana",10,3,5,0,0],["Nellore","AP/Telangana",4,3,2,1,0],["Kurnool","AP/Telangana",1,0,0,0,0],
+["Mysore","Karnataka",5,4,5,0,5],["Bangalore","Karnataka",6,5,1,3,0],["Hubli","Karnataka",5,1,2,0,0],["Mangalore","Karnataka",3,0,0,0,0],
+["Thrissur-MG Road","Kerala",2,5,2,1,0],["Trivandrum","Kerala",0,1,1,0,0],
+["Chennai","Tamil Nadu",2,2,1,0,2],["Madhurai","Tamil Nadu",1,0,0,0,0],["Coimbatore","Tamil Nadu",0,1,0,0,1],["Salem","Tamil Nadu",0,0,0,0,1],
+["Indore","Indore",0,0,0,0,3],["No sales group","Unassigned",0,0,0,0,16]];
+var COL=["#2f6fa8","#0f766e","#9aa7b3","#d98e04","#b42318"];
+var LAB=["Call Back","Follow Up","Cold / Dead","Warm / Hot","Untouched"];
+/* advisor, leads, worked, untouched, callback, warm/hot */
+var AD=[["Nandana M K",14,10,4,4,0],["Abhinaya Sri Pendela",13,13,0,9,0],["Chandralekha Mangaduddi",10,10,0,10,0],["Ruchitha Naga Venkata",9,9,0,8,0],["Pavani B",9,8,1,4,0],["Nagendra Y",9,9,0,1,0],["Monisha S Narayan",8,8,0,3,2],["Selvi K",7,0,7,0,0],["Pranitha K",7,6,1,6,0],["Jayasree Pasupula",7,7,0,5,0],["Subana Begum Shaik",7,7,0,6,0],["Supriya Kamatham",7,7,0,7,0],["Ancy Velankanni Y",7,7,0,3,1],["Veeramani Reddi",7,7,0,7,0],["Selvi / Neelima etc.",0,0,0,0,0]].slice(0,14);
+function $(i){return document.getElementById(i)}
+var mx=Math.max.apply(null,ST.map(function(s){return s[1]}));
+$("stages").innerHTML=ST.map(function(s){return '<div class="row"><span>'+s[0]+'</span><div class="bar"><i style="width:'+(s[1]/mx*100)+'%;background:'+s[2]+'"></i></div><span class="num">'+s[1]+'</span></div>'}).join("");
+var hm=Math.max.apply(null,HR.map(function(h){return h[1]}));
+$("hours").innerHTML=HR.map(function(h){return '<div title="'+h[1]+' leads"><span>'+h[1]+'</span><i style="height:'+(h[1]/hm*100)+'%"></i><span>'+h[0]+'h</span></div>'}).join("");
+$("lg").innerHTML=LAB.map(function(l,i){return '<span><s style="background:'+COL[i]+'"></s>'+l+'</span>'}).join("");
+var regs=["All regions"].concat(BR.map(function(b){return b[1]}).filter(function(v,i,a){return a.indexOf(v)===i}));
+$("reg").innerHTML=regs.map(function(r){return "<option>"+r+"</option>"}).join("");
+function draw(){var f=$("reg").value,rows=BR.filter(function(b){return f==="All regions"||b[1]===f});
+var m=Math.max.apply(null,rows.map(function(b){return b.slice(2).reduce(function(a,c){return a+c},0)}));
+$("branches").innerHTML=rows.map(function(b){var v=b.slice(2),n=v.reduce(function(a,c){return a+c},0);
+return '<div class="row"><span>'+b[0]+'</span><div class="bar" style="width:'+(n/m*100)+'%">'+v.map(function(x,i){return x?'<i title="'+LAB[i]+': '+x+'" style="width:'+(x/n*100)+'%;background:'+COL[i]+'"></i>':""}).join("")+'</div><span class="num">'+n+'</span></div>'}).join("")}
+$("reg").onchange=draw;draw();
+$("adv").innerHTML='<tr><th>Advisor</th><th>Leads</th><th>Worked</th><th>Untouched</th><th>Call Back</th><th>Warm/Hot</th></tr>'+AD.map(function(a){return '<tr><td>'+a[0]+'</td><td>'+a[1]+'</td><td>'+a[2]+'</td><td class="'+(a[3]>0?"bad":"")+'">'+a[3]+'</td><td>'+a[4]+'</td><td class="'+(a[5]>0?"good":"")+'">'+a[5]+'</td></tr>'}).join("");
+</script>
+</body>
+</html>
